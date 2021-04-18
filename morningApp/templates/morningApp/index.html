@@ -9,5 +9,22 @@
 </head>
 <body>
     <h1 class = "title"><span>投票.com</span></h1>
+    <table>
+        <tr>
+        {% for h in header %}
+            <th>{{ h }}</th>
+        {% endfor %}
+        </tr>
+
+        {% for i in val %}
+        <tr>
+            <td>{{ i.contents }}</td>
+            <td>{{ i.choice_a }}</td>
+            <td>{{ i.choice_b }}</td>
+            <td>{{ i.choice_c }}</td>
+            <td>{{ i.choice_d }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
