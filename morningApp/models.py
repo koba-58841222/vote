@@ -1,6 +1,3 @@
-from django.db import models
-
-# Create your models here.
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
@@ -133,9 +130,13 @@ class Question(models.Model):
     votes_b = models.IntegerField(blank=True, null=True)
     votes_c = models.IntegerField(blank=True, null=True)
     votes_d = models.IntegerField(blank=True, null=True)
+    per_a = models.FloatField(blank=True, null=True)
+    per_b = models.FloatField(blank=True, null=True)
+    per_c = models.FloatField(blank=True, null=True)
+    per_d = models.FloatField(blank=True, null=True)
 
     def __str__(self):
-        return '<id:' + str(self.id) + ',' + self.contents + ',' + self.choice_a + ',' + self.choice_b + ',' + self.choice_c + ',' + self.choice_d + ',' + self.total_votes + ',' + self.votes_a + ',' + self.votes_b + ',' + self.votes_c + ',' + self.votes_d + '>'
+        return '<id:' + str(self.id) + ',' + self.contents + ',' + self.choice_a + ',' + self.choice_b + ',' + self.choice_c + ',' + self.choice_d + ',' + self.total_votes + ',' + self.votes_a + ',' + self.votes_b + ',' + self.votes_c + ',' + self.votes_d + ',' + self.per_a + ',' + self.per_b + ',' + self.per_c + ',' + self.per_d + '>'
 
     class Meta:
         managed = False

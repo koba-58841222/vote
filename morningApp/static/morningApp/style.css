@@ -3,19 +3,61 @@ body {
 }
 
 .title {
-    font-size: 4rem;
+    font-size: 2rem;
     position: relative;
-    padding: 1.5rem;
+    padding: 1rem;
     text-align: center;
 }
   
 .title:before {
     position: absolute;
-    bottom: -10px;
-    left: calc(50% - 30px);
-    width: 60px;
-    height: 5px;
+    bottom: -5px;
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 4px;
     content: '';
     border-radius: 3px;
     background: #000;
+}
+
+@media screen and (min-width: 481px) {
+    /* 481px以上に適用されるCSS（タブレット用） */
+    .title {
+        font-size: 3rem;
+        position: relative;
+        padding: 1.5rem;
+        text-align: center;
+    }
+      
+    .title:before {
+        position: absolute;
+        bottom: -7px;
+        left: calc(50% - 30px);
+        width: 60px;
+        height: 5px;
+        content: '';
+        border-radius: 3px;
+        background: #000;
+    }
+}
+
+@media screen and (min-width: 960px) {
+    /* 960px以上に適用されるCSS（PC用） */
+    .title {
+        font-size: 4rem;
+        position: relative;
+        padding: 1.5rem;
+        text-align: center;
+    }
+      
+    .title:before {
+        position: absolute;
+        bottom: -10px;
+        left: calc(50% - 30px);
+        width: 60px;
+        height: 5px;
+        content: '';
+        border-radius: 3px;
+        background: #000;
+    }
 }

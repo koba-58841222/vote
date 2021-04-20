@@ -10,19 +10,27 @@
 <body>
     <h1 class = "title"><span>投票.com</span></h1>
     <table>
-        <tr>
-        {% for h in header %}
-            <th>{{ h }}</th>
-        {% endfor %}
-        </tr>
-
         {% for i in val %}
         <tr>
-            <td>{{ i.contents }}</td>
-            <td>{{ i.choice_a }}</td>
-            <td>{{ i.choice_b }}</td>
-            <td>{{ i.choice_c }}</td>
-            <td>{{ i.choice_d }}</td>
+            <th>{{ i.contents }}</th>
+        </tr>
+
+        <tr>
+            <td><a href="{% url 'vote_a' i.pk %}">{{ i.choice_a }}</a></td>
+            <td><a href="{% url 'vote_b' i.pk %}">{{ i.choice_b }}</a></td>
+            <td><a href="{% url 'vote_c' i.pk %}">{{ i.choice_c }}</a></td>
+            <td><a href="{% url 'vote_d' i.pk %}">{{ i.choice_d }}</a></td>
+        </tr>
+
+        <tr>
+            <td>{{ i.per_a }}</td>
+            <td>{{ i.per_b }}</td>
+            <td>{{ i.per_c }}</td>
+            <td>{{ i.per_d }}</td>
+        </tr>
+
+        <tr>
+            <td>{{ i.total_votes }}</td>
         </tr>
         {% endfor %}
     </table>
