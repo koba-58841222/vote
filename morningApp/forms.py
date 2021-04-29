@@ -1,12 +1,12 @@
 from django import forms
 from . models import Question
+from . models import User
  
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ('id', 'contents', 'choice_a','choice_b','choice_c','choice_d')
+        fields = ('contents', 'choice_a','choice_b','choice_c','choice_d')
         labels={
-            'id':'ID',
            'contents':'アンケート内容',
            'choice_a':'選択肢A',
            'choice_b':'選択肢B',

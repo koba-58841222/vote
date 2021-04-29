@@ -124,3 +124,7 @@ except ImportError:
 
 PAGE_PER_ITEM = 10
 SITE_NAME = "投票.com"
+
+LOGIN_URL = '/login'            # ログイン時
+LOGIN_REDIRECT_URL = '../'   # ログイン後
+LOGOUT_REDIRECT_URL = '../'  # ログアウト後

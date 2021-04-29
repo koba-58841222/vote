@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン</title>
+    <link href = "{% static 'morningApp/style.css' %}" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+    <h2>ログイン</h2>
+    <form method="POST">{% csrf_token %}
+    {% if form.errors %}
+        <p>ユーザー名またはパスワードが間違っています。もう一度入力してください。</p>
+    {% endif %}
+    <h2>ログイン</h2>
+    <label>ユーザー名</label>
+    <input name="username">
+    <br>
+    <label>パスワード</label>
+    <input type="password" name="password">
+    <br>
+    <input type="submit" value="ログイン">
+</form>
+</body>
+</html>
