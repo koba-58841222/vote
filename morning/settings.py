@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'morningApp.apps.MorningappConfig'
+    'morningApp.apps.MorningappConfig',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,6 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+PAGE_PER_ITEM = 10
+SITE_NAME = "投票.com"

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load bootstrap4 %}
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +10,13 @@
 </head>
 <body>
     <h1 class = "title"><span>投票.com</span></h1>
+    <h2><a href="{% url 'create' %}">アンケート作成</a></h2>
+    <form action="{% url 'index' %}" method="get">
+        <input name="keyword" type="text">
+        <button type="submit">検索する</button>
+    </form>
     <table>
-        {% for i in val %}
+        {% for i in page_obj %}
         <tr>
             <th>{{ i.contents }}</th>
         </tr>
@@ -23,16 +29,45 @@
         </tr>
 
         <tr>
-            <td>{{ i.per_a }}</td>
-            <td>{{ i.per_b }}</td>
-            <td>{{ i.per_c }}</td>
-            <td>{{ i.per_d }}</td>
+            <td id="per_a">{{ i.per_a }}%</td>
+            <td id="per_b">{{ i.per_b }}%</td>
+            <td id="per_c">{{ i.per_c }}%</td>
+            <td id="per_d">{{ i.per_d }}%</td>
         </tr>
 
         <tr>
-            <td>{{ i.total_votes }}</td>
+            <td id="total_votes">投票数：{{ i.total_votes }}</td>
         </tr>
         {% endfor %}
     </table>
+    <div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li><a class="page-link text-primary d-inline-block" href="?page={{ page_obj.previous_page_number }}">前</a></li>
+                {% else %}
+                    <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">前</div></li>
+                {% endif %}
+    
+                {% for link_page in page_obj.paginator.page_range %}
+                    {% if link_page %}
+                        {% if link_page == page_obj.number %}
+                            <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">{{ link_page }}</div></li>
+                        {% else %}
+                            <li><a class="page-link text-primary d-inline-block" href="?page={{ link_page }}">{{ link_page }}</a></li>
+                        {% endif %}
+                    {% else %}
+                        <li class="disabled"><a class="page-link text-secondary d-inline-block text-muted" href="#">・・・</a></li>
+                    {% endif %}
+                {% endfor %}
+    
+                {% if page_obj.has_next %}
+                    <li><a class="page-link text-primary d-inline-block" href="?page={{ page_obj.next_page_number }}">次</a></li>
+                {% else %}
+                    <li class="disabled"><div class="page-link text-secondary d-inline-block disabled" href="#">次</div></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 </body>
 </html>

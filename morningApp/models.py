@@ -125,16 +125,16 @@ class Question(models.Model):
     choice_b = models.CharField(max_length=30, blank=True, null=True)
     choice_c = models.CharField(max_length=30, blank=True, null=True)
     choice_d = models.CharField(max_length=30, blank=True, null=True)
-    total_votes = models.IntegerField(blank=True, null=True)
-    votes_a = models.IntegerField(blank=True, null=True)
-    votes_b = models.IntegerField(blank=True, null=True)
-    votes_c = models.IntegerField(blank=True, null=True)
-    votes_d = models.IntegerField(blank=True, null=True)
-    per_a = models.FloatField(blank=True, null=True)
-    per_b = models.FloatField(blank=True, null=True)
-    per_c = models.FloatField(blank=True, null=True)
-    per_d = models.FloatField(blank=True, null=True)
-
+    total_votes = models.IntegerField(blank=True, null=True, default=0)
+    votes_a = models.IntegerField(blank=True, null=True, default=0)
+    votes_b = models.IntegerField(blank=True, null=True, default=0)
+    votes_c = models.IntegerField(blank=True, null=True, default=0)
+    votes_d = models.IntegerField(blank=True, null=True, default=0)
+    per_a = models.IntegerField(blank=True, null=True, default=0)
+    per_b = models.IntegerField(blank=True, null=True, default=0)
+    per_c = models.IntegerField(blank=True, null=True, default=0)
+    per_d = models.IntegerField(blank=True, null=True, default=0)
+    
     def __str__(self):
         return '<id:' + str(self.id) + ',' + self.contents + ',' + self.choice_a + ',' + self.choice_b + ',' + self.choice_c + ',' + self.choice_d + ',' + self.total_votes + ',' + self.votes_a + ',' + self.votes_b + ',' + self.votes_c + ',' + self.votes_d + ',' + self.per_a + ',' + self.per_b + ',' + self.per_c + ',' + self.per_d + '>'
 

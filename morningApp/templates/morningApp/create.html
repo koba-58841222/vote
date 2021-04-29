@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+{% load bootstrap4 %}
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アンケート作成</title>
+    <link href = "{% static 'morningApp/style.css' %}" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+    <h1 class = "title"><span>アンケート作成</span></h1>
+
+    <form action='{% url "addQuestion" %}' method='post' class='form'>
+        <!-- ユーザー登録フォームを表示 -->
+        {% csrf_token %}
+        {% bootstrap_form questionForm %}
+        <button type='submit' class='btn btn-outline-primary'>登録</button>
+        <a href='{% url "create" %}' class='btn btn-outline-secondary'>戻る</a>
+    </form>
+</body>
+</html>
