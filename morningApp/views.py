@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
-from django.http.response import JsonResponse
+from django.http import JsonResponse
 from .models import Question
 from .forms import QuestionForm
 from django.db.models import Q
@@ -9,6 +9,9 @@ from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.utils import timezone
+from django.core import serializers
+from django.http import HttpResponse
+import json
 
 # Create your views here.
 
@@ -60,7 +63,16 @@ def vote_a(request, pk):
     question.per_d =  (question.votes_d / question.total_votes) * 100
     question.last_vote = timezone.now()
     question.save() # 保存をする
-    return redirect('index')
+    
+    params = {
+        'per_a':str(question.per_a),
+        'per_b':str(question.per_b),
+        'per_c':str(question.per_c),
+        'per_d':str(question.per_d),
+        'total_votes':str(question.total_votes),
+    }
+    data = json.dumps(params, ensure_ascii=False, indent=2)
+    return HttpResponse(data)
 
 def vote_b(request, pk):
     question = Question.objects.get(pk=pk)
