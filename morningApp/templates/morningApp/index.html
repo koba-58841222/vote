@@ -28,24 +28,29 @@
         </tr>
 
         <tr>
-            <form id="ajax_a" action= "{% url 'vote_a' i.pk %}" method="POST">
-                <td><input type="submit" id="choice_a" value="{{ i.choice_a }}"></td>
-                {% csrf_token %}
+            <form action="{% url 'vote_a' i.pk %}" method="get">
+                <td><input type="submit" value="{{ i.choice_a }}"></td>
             </form>
-            <td><a href="{% url 'vote_b' i.pk %}">{{ i.choice_b }}</a></td>
-            <td><a href="{% url 'vote_c' i.pk %}">{{ i.choice_c }}</a></td>
-            <td><a href="{% url 'vote_d' i.pk %}">{{ i.choice_d }}</a></td>
+            <form action="{% url 'vote_b' i.pk %}" method="get">
+                <td><input type="submit" value="{{ i.choice_b }}"></td>
+            </form>
+            <form action="{% url 'vote_c' i.pk %}" method="get">
+                <td><input type="submit" value="{{ i.choice_c }}"></td>
+            </form>
+            <form action="{% url 'vote_d' i.pk %}" method="get">
+                <td><input type="submit" value="{{ i.choice_d }}"></td>
+            </form>
         </tr>
 
         <tr>
-            <td><span id="per_a"></span>%</td>
-            <td><span id="per_b"></span>%</td>
-            <td><span id="per_c"></span>%</td>
-            <td><span id="per_d"></span>%</td>
+            <td id="per_a">{{ i.per_a }}%</td>
+            <td id="per_b">{{ i.per_b }}%</td>
+            <td id="per_c">{{ i.per_c }}%</td>
+            <td id="per_d">{{ i.per_d }}%</td>
         </tr>
 
         <tr>
-            <td>投票数：<span id="total_votes"></span></td>
+            <td id="total_votes">投票数：{{ i.total_votes }}</td>
         </tr>
         {% endfor %}
     </table>
@@ -82,69 +87,6 @@
     <a href="{% url 'login' %}">ログイン</a>
     <a href="{% url 'signup' %}">アカウント作成</a>
     {% endif %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-
-        var csrftoken = getCookie('csrftoken');
-
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
-        $('#ajax_a').on('submit', function(event) {
-            event.preventDefault();
-            $('#per_a').empty();
-            $('#per_b').empty();
-            $('#per_c').empty();
-            $('#per_d').empty();
-            $('#total_votes').empty();
-            var form = $(this);
-            $.ajax({
-                url:form.prop("action"),
-                method:form.prop("method"),
-                dataType:"json",
-                timespan:1000,
-            })
-            // Ajaxリクエストが成功した時発動
-            .done( data => {
-                $('#per_a').prepend(data["per_a"]);
-                $('#per_b').prepend(data["per_b"]);
-                $('#per_c').prepend(data["per_c"]);
-                $('#per_d').prepend(data["per_d"]);
-                $('#total_votes').prepend(data["total_votes"]);
-            })
-            // Ajaxリクエストが失敗した時発動
-            .fail( (data) => {
-                alert("失敗");
-            })
-            // Ajaxリクエストが成功・失敗どちらでも発動
-            .always( (data) => {
-                alert("常");
-            });
-        });
-    </script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
 </body>
 </html>

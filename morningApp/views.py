@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 from django.http import JsonResponse
 from .models import Question
+from .models import UserVote
 from .forms import QuestionForm
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -52,9 +53,17 @@ def test(request):
     return render(request, 'morningApp/test.html', {})
 
 def vote_a(request, pk):
+    user_vote = UserVote.objects.filter(question_id=pk)
+    user = request.user
+    if user_vote is not None:
+        for u in user_vote:
+            if u.user_id == user.id:
+                return redirect(request.META['HTTP_REFERER'])
     question = Question.objects.get(pk=pk)
     question.total_votes += 1
     question.votes_a += 1
+    a = UserVote(question_id=pk, user_id=user.id)
+    a.save()
     question.save() # 保存をする
     
     question.per_a =  (question.votes_a / question.total_votes) * 100
@@ -63,7 +72,7 @@ def vote_a(request, pk):
     question.per_d =  (question.votes_d / question.total_votes) * 100
     question.last_vote = timezone.now()
     question.save() # 保存をする
-    
+    """
     params = {
         'per_a':str(question.per_a),
         'per_b':str(question.per_b),
@@ -73,11 +82,21 @@ def vote_a(request, pk):
     }
     data = json.dumps(params, ensure_ascii=False, indent=2)
     return HttpResponse(data)
+    """
+    return redirect(request.META['HTTP_REFERER'])
 
 def vote_b(request, pk):
+    user_vote = UserVote.objects.filter(question_id=pk)
+    user = request.user
+    if user_vote is not None:
+        for u in user_vote:
+            if u.user_id == user.id:
+                return redirect(request.META['HTTP_REFERER'])
     question = Question.objects.get(pk=pk)
     question.total_votes += 1
     question.votes_b += 1
+    a = UserVote(question_id=pk, user_id=user.id)
+    a.save()
     question.save() # 保存をする
     
     question.per_a =  (question.votes_a / question.total_votes) * 100
@@ -86,12 +105,31 @@ def vote_b(request, pk):
     question.per_d =  (question.votes_d / question.total_votes) * 100
     question.last_vote = timezone.now()
     question.save() # 保存をする
-    return redirect('index')
+    """
+    params = {
+        'per_a':str(question.per_a),
+        'per_b':str(question.per_b),
+        'per_c':str(question.per_c),
+        'per_d':str(question.per_d),
+        'total_votes':str(question.total_votes),
+    }
+    data = json.dumps(params, ensure_ascii=False, indent=2)
+    return HttpResponse(data)
+    """
+    return redirect(request.META['HTTP_REFERER'])
 
 def vote_c(request, pk):
+    user_vote = UserVote.objects.filter(question_id=pk)
+    user = request.user
+    if user_vote is not None:
+        for u in user_vote:
+            if u.user_id == user.id:
+                return redirect(request.META['HTTP_REFERER'])
     question = Question.objects.get(pk=pk)
     question.total_votes += 1
     question.votes_c += 1
+    a = UserVote(question_id=pk, user_id=user.id)
+    a.save()
     question.save() # 保存をする
     
     question.per_a =  (question.votes_a / question.total_votes) * 100
@@ -100,12 +138,31 @@ def vote_c(request, pk):
     question.per_d =  (question.votes_d / question.total_votes) * 100
     question.last_vote = timezone.now()
     question.save() # 保存をする
-    return redirect('index')
+    """
+    params = {
+        'per_a':str(question.per_a),
+        'per_b':str(question.per_b),
+        'per_c':str(question.per_c),
+        'per_d':str(question.per_d),
+        'total_votes':str(question.total_votes),
+    }
+    data = json.dumps(params, ensure_ascii=False, indent=2)
+    return HttpResponse(data)
+    """
+    return redirect(request.META['HTTP_REFERER'])
 
 def vote_d(request, pk):
+    user_vote = UserVote.objects.filter(question_id=pk)
+    user = request.user
+    if user_vote is not None:
+        for u in user_vote:
+            if u.user_id == user.id:
+                return redirect(request.META['HTTP_REFERER'])
     question = Question.objects.get(pk=pk)
     question.total_votes += 1
     question.votes_d += 1
+    a = UserVote(question_id=pk, user_id=user.id)
+    a.save()
     question.save() # 保存をする
     
     question.per_a =  (question.votes_a / question.total_votes) * 100
@@ -114,7 +171,18 @@ def vote_d(request, pk):
     question.per_d =  (question.votes_d / question.total_votes) * 100
     question.last_vote = timezone.now()
     question.save() # 保存をする
-    return redirect('index')
+    """
+    params = {
+        'per_a':str(question.per_a),
+        'per_b':str(question.per_b),
+        'per_c':str(question.per_c),
+        'per_d':str(question.per_d),
+        'total_votes':str(question.total_votes),
+    }
+    data = json.dumps(params, ensure_ascii=False, indent=2)
+    return HttpResponse(data)
+    """
+    return redirect(request.META['HTTP_REFERER'])
 
 def createQ(request):
     form = QuestionForm()

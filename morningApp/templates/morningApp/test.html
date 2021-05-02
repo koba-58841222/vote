@@ -15,5 +15,125 @@
     <div class = "b1">
         <p>コンテンツ</p>
     </div>
+    $('#ajax_a').on('submit', function(event) {
+        event.preventDefault();
+        $('#per_a').empty();
+        $('#per_b').empty();
+        $('#per_c').empty();
+        $('#per_d').empty();
+        $('#total_votes').empty();
+        var form = $(this);
+        $.ajax({
+            url:form.prop("action"),
+            method:form.prop("method"),
+            dataType:"json",
+            timespan:1000,
+        })
+        // Ajaxリクエストが成功した時発動
+        .done( data => {
+            $('#per_a').prepend(data["per_a"]);
+            $('#per_b').prepend(data["per_b"]);
+            $('#per_c').prepend(data["per_c"]);
+            $('#per_d').prepend(data["per_d"]);
+            $('#total_votes').prepend(data["total_votes"]);
+        })
+        // Ajaxリクエストが失敗した時発動
+        .fail( (data) => {
+            alert("失敗");
+        })
+        // Ajaxリクエストが成功・失敗どちらでも発動
+        .always( (data) => {
+        });
+    });
+    $('#ajax_b').on('submit', function(event) {
+        event.preventDefault();
+        $('#per_a').empty();
+        $('#per_b').empty();
+        $('#per_c').empty();
+        $('#per_d').empty();
+        $('#total_votes').empty();
+        var form = $(this);
+        $.ajax({
+            url:form.prop("action"),
+            method:form.prop("method"),
+            dataType:"json",
+            timespan:1000,
+        })
+        // Ajaxリクエストが成功した時発動
+        .done( data => {
+            $('#per_a').prepend(data["per_a"]);
+            $('#per_b').prepend(data["per_b"]);
+            $('#per_c').prepend(data["per_c"]);
+            $('#per_d').prepend(data["per_d"]);
+            $('#total_votes').prepend(data["total_votes"]);
+        })
+        // Ajaxリクエストが失敗した時発動
+        .fail( (data) => {
+            alert("失敗");
+        })
+        // Ajaxリクエストが成功・失敗どちらでも発動
+        .always( (data) => {
+        });
+    });
+    $('#ajax_c').on('submit', function(event) {
+        event.preventDefault();
+        $('#per_a').empty();
+        $('#per_b').empty();
+        $('#per_c').empty();
+        $('#per_d').empty();
+        $('#total_votes').empty();
+        var form = $(this);
+        $.ajax({
+            url:form.prop("action"),
+            method:form.prop("method"),
+            dataType:"json",
+            timespan:1000,
+        })
+        // Ajaxリクエストが成功した時発動
+        .done( data => {
+            $('#per_a').prepend(data["per_a"]);
+            $('#per_b').prepend(data["per_b"]);
+            $('#per_c').prepend(data["per_c"]);
+            $('#per_d').prepend(data["per_d"]);
+            $('#total_votes').prepend(data["total_votes"]);
+        })
+        // Ajaxリクエストが失敗した時発動
+        .fail( (data) => {
+            alert("失敗");
+        })
+        // Ajaxリクエストが成功・失敗どちらでも発動
+        .always( (data) => {
+        });
+    });
+    $('#ajax_d').on('submit', function(event) {
+        event.preventDefault();
+        $('#per_a').empty();
+        $('#per_b').empty();
+        $('#per_c').empty();
+        $('#per_d').empty();
+        $('#total_votes').empty();
+        var form = $(this);
+        $.ajax({
+            url:form.prop("action"),
+            method:form.prop("method"),
+            dataType:"json",
+            timespan:1000,
+        })
+        // Ajaxリクエストが成功した時発動
+        .done( data => {
+            $('#per_a').prepend(data["per_a"]);
+            $('#per_b').prepend(data["per_b"]);
+            $('#per_c').prepend(data["per_c"]);
+            $('#per_d').prepend(data["per_d"]);
+            $('#total_votes').prepend(data["total_votes"]);
+        })
+        // Ajaxリクエストが失敗した時発動
+        .fail( (data) => {
+            alert("失敗");
+        })
+        // Ajaxリクエストが成功・失敗どちらでも発動
+        .always( (data) => {
+        });
+    });
 </body>
 </html>

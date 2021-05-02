@@ -155,3 +155,13 @@ class Question(models.Model):
     class Meta:
         managed = False
         db_table = 'question'
+
+
+class UserVote(models.Model):
+    # id = models.IntegerField(primary_key=True)
+    question_id = models.IntegerField(blank=True, null=True)
+    user_id = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'user_vote'
