@@ -34,19 +34,27 @@
             <form action="{% url 'vote_b' i.pk %}" method="get">
                 <td><input type="submit" value="{{ i.choice_b }}"></td>
             </form>
+            {% if i.choice_c %}
             <form action="{% url 'vote_c' i.pk %}" method="get">
                 <td><input type="submit" value="{{ i.choice_c }}"></td>
             </form>
+            {% endif %}
+            {% if i.choice_d %}
             <form action="{% url 'vote_d' i.pk %}" method="get">
                 <td><input type="submit" value="{{ i.choice_d }}"></td>
             </form>
+            {% endif %}
         </tr>
 
         <tr>
             <td id="per_a">{{ i.per_a }}%</td>
             <td id="per_b">{{ i.per_b }}%</td>
+            {% if i.choice_d %}
             <td id="per_c">{{ i.per_c }}%</td>
+            {% endif %}
+            {% if i.choice_d %}
             <td id="per_d">{{ i.per_d }}%</td>
+            {% endif %}
         </tr>
 
         <tr>

@@ -13,11 +13,20 @@ from django.utils import timezone
 from django.core import serializers
 from django.http import HttpResponse
 import json
+from datetime import datetime, date, timedelta
+from dateutil.relativedelta import relativedelta
 
 # Create your views here.
 
 def index(request):
-    question = Question.objects.all().order_by('-id')
+    question = Question.objects.filter(end_flg=False).order_by('-id')
+    today = timezone.now()
+    for val in question:
+        ccc = val.create_date
+        dt = ccc + relativedelta(months=1)
+        if today > dt:
+            val.end_flg = True
+            val.save()
     keyword = request.GET.get('keyword')
 
     if keyword:
@@ -28,7 +37,7 @@ def index(request):
     return render(request, 'morningApp/index.html', {'page_obj': page_obj, 'site_name':settings.SITE_NAME})
 
 def popular(request):
-    question = Question.objects.all().order_by('-total_votes')
+    question = Question.objects.filter(end_flg=False).order_by('-total_votes')
     keyword = request.GET.get('keyword')
 
     if keyword:
@@ -39,7 +48,7 @@ def popular(request):
     return render(request, 'morningApp/index.html', {'page_obj': page_obj, 'site_name':settings.SITE_NAME})
 
 def trend(request):
-    question = Question.objects.filter(last_vote__isnull=False).order_by('-last_vote')
+    question = Question.objects.filter(last_vote__isnull=False, end_flg=False).order_by('-last_vote')
     keyword = request.GET.get('keyword')
 
     if keyword:
@@ -198,7 +207,10 @@ def addQuestion(request):
         #リクエストをもとにフォームをインスタンス化
         aaa = QuestionForm(request.POST)
         if aaa.is_valid():
-            aaa.save()
+            bbb = aaa.save(commit=False)
+            user = request.user
+            bbb.create_user = user.id
+            bbb.save()
     return redirect('index')
 
 def paginate_query(request, queryset, count):

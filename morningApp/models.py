@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.utils import timezone
 
 
 class User(models.Model):
@@ -148,9 +149,12 @@ class Question(models.Model):
     per_c = models.IntegerField(blank=True, null=True, default=0)
     per_d = models.IntegerField(blank=True, null=True, default=0)
     last_vote = models.DateTimeField(blank=True, null=True)
+    create_user = models.IntegerField(blank=True, null=True)
+    create_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
+    end_flg = models.BooleanField(blank=True, null=True, default=False)
     
     def __str__(self):
-        return '<' + self.contents + ',' + self.choice_a + ',' + self.choice_b + ',' + self.choice_c + ',' + self.choice_d + ',' + self.total_votes + ',' + self.votes_a + ',' + self.votes_b + ',' + self.votes_c + ',' + self.votes_d + ',' + self.per_a + ',' + self.per_b + ',' + self.per_c + ',' + self.per_d + '>'
+        return '<' + self.contents + ',' + self.choice_a + ',' + self.choice_b + ',' + self.choice_c + ',' + self.choice_d + ',' + self.total_votes + ',' + self.votes_a + ',' + self.votes_b + ',' + self.votes_c + ',' + self.votes_d + ',' + self.per_a + ',' + self.per_b + ',' + self.per_c + ',' + self.per_d + ',' + self.create_date + '>'
 
     class Meta:
         managed = False
@@ -164,4 +168,4 @@ class UserVote(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'user_vote'
+        db_table = 'user_vote'# This is an auto-generated Django model module.
